@@ -11,6 +11,7 @@ cd recommender
 git checkout start
 rm -rf .git
 git init .
+git add --all
 git commit -m "My recommender project"
 ```
 
