@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+    redis:
+        image: redis
+        restart: always
+        expose: 
+          - 6380
+        ports:
+          - 6380:6379
+        volumes:
+          - redis_data:/data
+        entrypoint: redis-server --appendonly yes
+
+volumes: 
+    redis_data:

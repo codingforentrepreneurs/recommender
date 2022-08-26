@@ -1,0 +1,6 @@
+Celery
+Django
+django-celery-beat 
+django-celery-results # currently requires Django 4.0 or older
+python-decouple
+redis
