@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+
+
+{% block content %}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for instance in object_list %}
+    <div class="col">
+        {% include 'movies/snippet/card.html' with object=instance %}
+      </div> <!-- end col -->
+
+      {% endfor %}
+  </div> <!-- end row -->
+
+
+
+
+{% endblock %}
