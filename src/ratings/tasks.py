@@ -1,11 +1,15 @@
 import random
-
-
+import time
+import datetime
 
 from celery import shared_task
+from django.db.models import Avg, Count
 from django.contrib.auth import get_user_model
-from movies.models import Movie
 from django.contrib.contenttypes.models import ContentType
+from django.utils import timezone
+
+
+from movies.models import Movie
 from .models import Rating, RatingChoice
 
 User= get_user_model()
@@ -35,3 +39,27 @@ def generate_fake_reviews(count=100, users=10, null_avg=False):
         )
         new_ratings.append(rating_obj.id)
     return new_ratings
+
+
+
+@shared_task(name='task_update_movie_ratings')
+def task_update_movie_ratings(object_id=None):
+    start_time = time.time()
+    ctype = ContentType.objects.get_for_model(Movie)
+    rating_qs = Rating.objects.filter(content_type=ctype)
+    if object_id is not None:
+        rating_qs = rating_qs.filter(object_id=object_id)
+    agg_ratings = rating_qs.values('object_id').annotate(average=Avg('value'), count=Count('object_id'))
+    for agg_rate in agg_ratings:
+        object_id = agg_rate['object_id']
+        rating_avg = agg_rate['average']
+        rating_count = agg_rate['count']
+        qs = Movie.objects.filter(id=object_id)
+        qs.update(
+            rating_avg=rating_avg,
+            rating_count=rating_count,
+            rating_last_updated=timezone.now()
+        )
+    total_time = time.time() - start_time
+    delta = datetime.timedelta(seconds=int(total_time))
+    print(f"Rating update took {delta} ({total_time}s)")
