@@ -1,4 +1,8 @@
 import random
+
+
+
+from celery import shared_task
 from django.contrib.auth import get_user_model
 from movies.models import Movie
 from django.contrib.contenttypes.models import ContentType
@@ -6,7 +10,7 @@ from .models import Rating, RatingChoice
 
 User= get_user_model()
 
-
+@shared_task(name='generate_fake_reviews')
 def generate_fake_reviews(count=100, users=10, null_avg=False):
     user_s = User.objects.first() # 1
     user_e = User.objects.last()

@@ -45,7 +45,7 @@ or
 # myapp/tasks.py
 from celery import shared_task
 
-@shared_task("my_function")
+@shared_task(name="my_function")
 def my_function(a=123, b=None, c=True):
     ...
 ```
