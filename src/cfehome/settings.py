@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     # external apps,
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'django_celery_beat', # scheduler
     'django_celery_results', # saves our task results
     # internal apps
@@ -45,6 +49,13 @@ INSTALLED_APPS = [
     'profiles',
     'ratings',
 ]
+
+SITE_ID = 1
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD='username'
+ACCOUNT_EMAIL_VERIFICATION = None
+# transactional emails
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
