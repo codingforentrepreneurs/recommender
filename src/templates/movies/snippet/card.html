@@ -16,19 +16,7 @@
          
         </div>
         <div>
-            <select class="form-control">
-              {% for choice in rating_choices %}
-                {% if choice is None %}
-         
-                <option disabled selected>Pick a rating</option>
-
-                {% else %}
-
-                <option {% if current_rating == choice %}selected{% endif %} value="{{ choice }}">{{ choice }}</option>
-                {% endif %}
-              {% endfor %}
-              
-            </select>
+           {% include 'ratings/snippet/rating-choices.html' with object_id=object.id current_rating=current_rating %}
             
             {% if object.rating_avg is not None %}
             <small class="text-muted">{{ object.rating_avg }} ({{ object.rating_count }})</small>
