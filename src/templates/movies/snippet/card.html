@@ -1,7 +1,7 @@
 <div class="card shadow-sm">
           
     <div class="card-body">
-      <h3>{{ object.title }} </h3>
+      <h3>{{ object.title }} <small>{{ object.id }}</small></h3>
       <p class="card-text">{{ object.overview }}</p>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
@@ -13,10 +13,17 @@
         </div>
         <div>
             <select class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+              {% for choice in rating_choices %}
+              {% if choice is None %}
+         
+                <option disabled selected>Pick a rating</option>
+
+                {% else %}
+
+                <option value="{{ choice }}">{{ choice }}</option>
+                {% endif %}
+              {% endfor %}
+              
             </select>
             
             {% if object.rating_avg is not None %}
