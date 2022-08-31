@@ -4,7 +4,8 @@
 <div class="card shadow-sm">
           
     <div class="card-body">
-      <h3>{{ object.title }} <small>{{ object.id }}</small></h3>
+      <h3>{{ object.title }} {% if object.release_date %}<small>{{ object.release_date.year }}</small>{% endif %}</h3>
+      <small>{{ object.id }}</small>
       <p class="card-text">{{ object.overview }}</p>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">

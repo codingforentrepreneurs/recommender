@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+
+
+{% block content %}
+
+<div class="row my-2">
+  <div class="col-md-2 ms-auto">
+      <select name='sort' class="form-control" hx-get="/movies/" hx-target="#target-list-change">
+        {% for key, value in sorting_choices.items %}
+          <option {% if request.session.movie_sort_order == value %}selected{% endif %} value="{{ value }}">{{ key|title }}</option>
+        {% endfor %}
+      
+      </select>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="target-list-change">
+   {% include 'movies/snippet/list.html' with object_list=object_list %}
+</div> <!-- end row -->
+
+
+
+
+{% endblock %}
