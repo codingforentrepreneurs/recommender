@@ -1,3 +1,6 @@
+{% load get_dict_val %}
+
+{% with my_ratings|get_dict_val:object.id  as current_rating %}
 <div class="card shadow-sm">
           
     <div class="card-body">
@@ -14,13 +17,13 @@
         <div>
             <select class="form-control">
               {% for choice in rating_choices %}
-              {% if choice is None %}
+                {% if choice is None %}
          
                 <option disabled selected>Pick a rating</option>
 
                 {% else %}
 
-                <option value="{{ choice }}">{{ choice }}</option>
+                <option {% if current_rating == choice %}selected{% endif %} value="{{ choice }}">{{ choice }}</option>
                 {% endif %}
               {% endfor %}
               
@@ -33,3 +36,5 @@
       </div>
     </div>
   </div>
+
+{% endwith %}
