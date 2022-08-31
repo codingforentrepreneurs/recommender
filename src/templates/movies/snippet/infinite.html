@@ -1,0 +1,7 @@
+
+<div hx-get="/movies/infinite/" 
+    hx-trigger="did-skip-movie from:body, did-rate-movie from:body"
+    hx-swap="outerHTML"
+    >
+    {% include 'movies/snippet/card.html' with object=object skip=True %}
+</div> <!-- end col -->
