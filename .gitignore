@@ -131,3 +131,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+src/data/ratings_small.csv
