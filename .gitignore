@@ -133,3 +133,4 @@ dmypy.json
 .pyre/
 src/data/ratings_small.csv
 src/data/links_small.csv
+src/nbs/model.pkl
