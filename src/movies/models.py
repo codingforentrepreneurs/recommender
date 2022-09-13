@@ -1,7 +1,7 @@
 import datetime
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
-from django.db.models import Q, F, Sum
+from django.db.models import Q, F, Sum, Case, When
 from django.utils import timezone
 
 from ratings.models import Rating
@@ -36,6 +36,11 @@ class MovieQuerySet(models.QuerySet):
 class MovieManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
         return MovieQuerySet(self.model, using=self._db)
+
+    def by_id_order(self, movie_pks=[]):
+        qs = self.get_queryset().filter(pk__in=movie_pks)
+        maintain_order = Case(*[When(pk=pki, then=idx) for idx, pki in enumerate(movie_pks)])
+        return qs.order_by(maintain_order)
     
     def needs_updating(self):
         return self.get_queryset().needs_updating()

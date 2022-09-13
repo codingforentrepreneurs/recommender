@@ -1,5 +1,5 @@
 
-<div hx-get="/movies/infinite/" 
+<div hx-get="{% if endless_path %}{{ endless_path }}{% else %}/movies/infinite/{% endif %}" 
     hx-trigger="did-skip-movie from:body, did-rate-movie from:body"
     hx-swap="outerHTML"
     >

@@ -92,6 +92,12 @@ movie_infinite_rating_view = MovieInfiniteRatingView.as_view()
 
 
 class MoviePopularView(MovieDetailView):
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['endless_path'] = '/movies/popular/'
+        return context
+    
     def get_object(self):
         user = self.request.user
         exclude_ids = []
