@@ -21,7 +21,14 @@
           </li>
           
         </ul>
+        {% if user.is_authenticated  %}
         <a class="btn btn-outline-primary" href="/accounts/logout/">{% user_display user %}</a>
+
+        {% else %}
+
+        <a class="btn btn-outline-primary"  href="/accounts/login">Login</a>
+
+        {% endif %}
         
       </div>
     </div>

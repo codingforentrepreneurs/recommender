@@ -15,10 +15,13 @@
 
 
     {% include 'navbar.html' %}
-    {% include 'messages.html' %}
+   
+    <div class="container-fluid">
+      {% include 'messages.html' %}
     {% block content %} 
 
     {% endblock %}
+  </div>
 
     {% block extra_body %}
     {% endblock %}
