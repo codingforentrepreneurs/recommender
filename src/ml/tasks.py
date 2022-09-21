@@ -21,6 +21,8 @@ def batch_users_prediction_task(users_ids=None, start_page=0, offset=50, max_pag
     movie_ids = Movie.objects.all().popular().values_list('id', flat=True)[start_page:end_page]
     recently_suggested = Suggestion.objects.get_recently_suggested(movie_ids, users_ids)
     new_suggestion = []
+    if not movie_ids.exists():
+        return 
     for movie_id in movie_ids:
         users_done = recently_suggested.get(f"{movie_id}") or []
         for u in users_ids:
