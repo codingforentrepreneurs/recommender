@@ -10,7 +10,7 @@ def home_view(request):
         return render(request, 'home.html', context)
     context['endless_path'] = '/'
     suggestion_qs = Suggestion.objects.filter(user=user, did_rate=False)
-    max_movies = 10
+    max_movies = 50
     request.session['total-new-suggestions'] = suggestion_qs.count()
     if suggestion_qs.exists():
         movie_ids = suggestion_qs.order_by("-value").values_list('object_id', flat=True)

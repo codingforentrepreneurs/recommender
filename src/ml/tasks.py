@@ -40,10 +40,16 @@ def batch_users_prediction_task(users_ids=None, start_page=0, offset=50, max_pag
                 'value': pred,
                 'content_type': ctype
             }
-            new_suggestion.append(
-                Suggestion(**data)
-            )
-    Suggestion.objects.bulk_create(new_suggestion, ignore_conflicts=True)
+            try:
+                obj, _ = Suggestion.objects.get_or_create(user_id=u, object_id=movie_id, content_type=ctype)
+            except Suggestion.MultipleObjectsReturned:
+                qs = Suggestion.objects.filter(user_id=u, object_id=movie_id, content_type=ctype)
+                obj = qs.first()
+                to_delete = qs.exclude(id=obj.id)
+                to_delete.delete()
+            if obj.value != pred:
+                obj.value = pred
+                obj.save()
     if end_page < max_pages:
         return batch_users_prediction_task(start_page=end_page-1)
 
