@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_htmx',
     # internal apps
     'exports',
+    'ml',
     'movies',
     'profiles',
     'ratings',

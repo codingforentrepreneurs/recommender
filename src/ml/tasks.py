@@ -6,8 +6,8 @@ from profiles import utils as profile_utils
 from . import utils as ml_utils
 
 @shared_task
-def train_surprise_model_task():
-    ml_utils.train_surprise_model()
+def train_surprise_model_task(n_epochs=20):
+    ml_utils.train_surprise_model(n_epochs=n_epochs)
 
 
 @shared_task
@@ -28,6 +28,10 @@ def batch_users_prediction_task(users_ids=None, start_page=0, offset=50, max_pag
         for u in users_ids:
             if u in users_done:
                 # print(movie_id, 'is done for', u, 'user')
+                continue
+            if u is None:
+                continue
+            if movie_id is None:
                 continue
             pred = model.predict(uid=u, iid=movie_id).est
             data = {

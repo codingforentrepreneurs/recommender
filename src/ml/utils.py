@@ -69,5 +69,7 @@ def load_model(model_type='surprise', model_ext='pkl'):
         with open(path_latest, 'rb') as f:
             model_data = pickle.load(f)
             model = model_data.get('model')
+    else:
+        raise ValueError("No model found.")
     return model
     

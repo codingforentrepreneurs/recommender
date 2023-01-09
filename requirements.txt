@@ -7,3 +7,5 @@ django-htmx
 Faker
 python-decouple
 redis
+numpy
+scikit-surprise
