@@ -8,6 +8,10 @@ Build a recommendation engine using Django &amp; a Machine Learning technique ca
 ```bash
 git clone https://github.com/codingforentrepreneurs/recommender
 cd recommender
+```
+If you're _starting in the course_, use the following:
+
+```
 git checkout start
 rm -rf .git
 git init .
