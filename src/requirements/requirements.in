@@ -10,3 +10,5 @@ redis
 numpy
 scikit-surprise
 google-cloud-secret-manager
+gunicorn
+

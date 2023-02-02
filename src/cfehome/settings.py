@@ -26,8 +26,11 @@ SECRET_KEY = config('SECRET_KEY', default=None)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', default=0, cast=bool) # True/False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [".cfe.sh", ".desalsa.io"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://*.desalsa.io:8200",
+    "https://*.cfe.sh",
+]
 
 # Application definition
 

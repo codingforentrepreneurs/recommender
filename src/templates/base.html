@@ -13,8 +13,10 @@
   </head>
   <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
-
+   
+    {% include 'demo/header.html' %}
     {% include 'navbar.html' %}
+   
    
     <div class="container-fluid">
       {% include 'messages.html' %}
